@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oyhon — Shaxsiy Veb-Sayt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-black: #0c0c0f;
+      --bg-card: #15151a;
+      --bg-card-hover: #1c1c23;
+      --accent-red: #e11d48;
+      --accent-red-dark: #be123c;
+      --accent-red-soft: rgba(225, 29, 72, 0.14);
+      --text-white: #ffffff;
+      --text-muted: #b3b3be;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --shadow-red: 0 12px 30px rgba(225, 29, 72, 0.28);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-black);
+      color: var(--text-white);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ================= NAVBAR ================= */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(12, 12, 15, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 11px;
+      height: 11px;
+      background: var(--accent-red);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent-red);
+    }
+
+    .logo span {
+      color: var(--accent-red);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    nav ul li a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      position: relative;
+      padding: 6px 0;
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--text-white);
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2.5px;
+      background: var(--accent-red);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .menu-toggle span {
+      width: 26px;
+      height: 2.5px;
+      background: var(--text-white);
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+
+    /* ================= HERO / BOSH SAHIFA ================= */
+    #home {
+      min-height: 100vh;
+      padding-top: 105px;
+      padding-bottom: 65px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background:
+        radial-gradient(circle at 82% 20%, rgba(225, 29, 72, 0.18), transparent 42%),
+        radial-gradient(circle at 12% 85%, rgba(255, 255, 255, 0.05), transparent 40%),
+        var(--bg-black);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-red-soft);
+      border: 1px solid rgba(225, 29, 72, 0.35);
+      color: #ff6b8b;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero-title span {
+      color: var(--accent-red);
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-red);
+      color: var(--text-white);
+      box-shadow: var(--shadow-red);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-red-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-white);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-white);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+    }
+
+    /* Profile Card in Hero */
+    .profile-card {
+      background: linear-gradient(160deg, #1b1b22 0%, #111115 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px 26px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    .profile-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-red), transparent);
+      border-radius: 0 0 8px 8px;
+    }
+
+    .avatar-ring {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--accent-red), var(--text-white));
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #141419;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-white);
+    }
+
+    .profile-name {
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .profile-role {
+      color: var(--accent-red);
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 18px;
+    }
+
+    .mini-stat-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 6px;
+      border-radius: 12px;
+    }
+
+    .mini-stat-num {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-white);
+    }
+
+    .mini-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ================= SECTIONS ================= */
+    section {
+      padding: 88px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section-header {
+      margin-bottom: 46px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--accent-red);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      max-width: 620px;
+      font-size: 0.98rem;
+    }
+
+    /* ================= MEN HAQIMDA ================= */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .about-text-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+    }
+
+    .about-text-card p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .about-text-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .info-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .info-item:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(225, 29, 72, 0.45);
+      transform: translateY(-3px);
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .info-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .color-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .c-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--text-white);
+    }
+
+    .c-black { background: #0c0c0f; }
+    .c-white { background: #ffffff; }
+    .c-red   { background: #e11d48; }
+
+    /* ================= QIZIQISHLARIM ================= */
+    .sports-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .sport-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px 22px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sport-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-5px);
+      border-color: var(--accent-red);
+    }
+
+    .sport-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--accent-red-soft);
+      color: var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .sport-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .sport-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ================= MENING QOBILYATLARIM ================= */
+    .skills-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .skill-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+    }
+
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .skill-name {
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+
+    .skill-percent {
+      color: var(--accent-red);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent-red), #ff5c7c);
+      border-radius: 999px;
+      transition: width 1.1s ease;
+    }
+
+    .skill-note {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    /* ================= KELAJAKDA ORZULARIM ================= */
+    .dreams-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .dream-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .dream-card.featured {
+      background: linear-gradient(160deg, #221016 0%, #15151a 100%);
+      border-color: var(--accent-red);
+      box-shadow: var(--shadow-red);
+    }
+
+    .dream-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .dream-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      margin-bottom: 12px;
+    }
+
+    .dream-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .dream-card p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #08080a;
+      border-top: 1px solid var(--border-subtle);
+      padding: 34px 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .footer-brand span {
+      color: var(--accent-red);
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about-grid,
+      .dreams-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
+        text-align: center;
+      }
+
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .profile-card {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: fixed;
+        top: 74px;
+        left: 0;
+        width: 100%;
+        background: #0e0e12;
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 20px;
+        display: none;
+      }
+
+      nav.open {
+        display: block;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .skills-wrapper,
+      .info-list {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER / NAVIGATSIYA ================= -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#home" class="logo">
+        <span class="logo-dot"></span>
+        OY<span>HON</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav id="navbar">
+        <ul>
+          <li><a href="#home" class="active">Bosh sahifa</a></li>
+          <li><a href="#about">Men haqimda</a></li>
+          <li><a href="#interests">Qiziqishlarim</a></li>
+          <li><a href="#skills">Mening qobilyatlarim</a></li>
+          <li><a href="#dreams">Kelajakda orzularim</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= 1. BOSH SAHIFA ================= -->
+  <section id="home">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">✦ Shaxsiy Sahifa • 13 yosh</div>
+        <h1 class="hero-title">Salom, men <span>Oyhon</span>!</h1>
+        <p class="hero-desc">
+          Faol, intiluvchan va maqsadli o‘quvchiman. Turli sport turlari bilan shug‘ullanishni,
+          ingliz tilini o‘rganishni yaxshi ko‘raman va kelajakda <strong>stuardessa</strong> bo‘lishni maqsad qilganman.
+        </p>
+        <div class="hero-actions">
+          <a href="#about" class="btn btn-primary">Men haqimda</a>
+          <a href="#dreams" class="btn btn-outline">Orzularim</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="avatar-ring">
+          <div class="avatar-inner">O</div>
+        </div>
+        <div class="profile-name">Oyhon</div>
+        <div class="profile-role">Bo‘lajak Stuardessa</div>
+        <div class="mini-stats">
+          <div class="mini-stat-box">
+            <div class="mini-stat-num">13</div>
+            <div class="mini-stat-label">Yosh</div>
+          </div>
+          <div class="mini-stat-box">
+            <div class="mini-stat-num">English</div>
+            <div class="mini-stat-label">Sevimli fan</div>
+          </div>
+          <div class="mini-stat-box">
+            <div class="mini-stat-num">Sport</div>
+            <div class="mini-stat-label">Qiziqish</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. MEN HAQIMDA ================= -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">02 • Tanishuv</span>
+        <h2 class="section-title">Men haqimda</h2>
+        <p class="section-subtitle">
+          Mening yoshim, yoqtirgan fanim, sevimli ranglarim va hayotiy maqsadlarim haqida qisqacha.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text-card">
+          <p>
+            Mening ismim <strong>Oyhon</strong>, yoshim <strong>13</strong> da. Har kuni yangi narsalarni o‘rganishga,
+            o‘z ustimda ishlashga va faol hayot tarzini olib borishga harakat qilaman.
+          </p>
+          <p>
+            Mening eng sevimli fanim — <strong>English</strong>. Ingliz tilini yaxshi bilish kelajakda dunyo bo‘ylab
+            sayohat qilish, turli millat odamlari bilan erkin suhbatlashish va orzumdagi kasbga erishishda juda muhim.
+          </p>
+          <p>
+            Uslub borasida <strong>qora, oq va qizil</strong> ranglar uyg‘unligini yoqtiraman — bu ranglar tartib,
+            ishonch va jasoratni ifodalaydi.
+          </p>
+        </div>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-label">Ism</div>
+            <div class="info-value">Oyhon</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Yosh</div>
+            <div class="info-value">13 yosh</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Sevimli fan</div>
+            <div class="info-value">English</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Kelajakdagi kasb</div>
+            <div class="info-value">Stuardessa</div>
+          </div>
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <div class="info-label">Sevimli ranglarim</div>
+            <div class="info-value">Qora, Oq va Qizil</div>
+            <div class="color-dots">
+              <span class="c-dot c-black" title="Qora"></span>
+              <span class="c-dot c-white" title="Oq"></span>
+              <span class="c-dot c-red" title="Qizil"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. QIZIQISHLARIM ================= -->
+  <section id="interests">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">03 • Faol hayot</span>
+        <h2 class="section-title">Qiziqishlarim</h2>
+        <p class="section-subtitle">
+          Har xil sport turlari menga chaqqonlik, chidamlilik, iroda va jamoa bilan ishlash ko‘nikmalarini beradi.
+        </p>
+      </div>
+
+      <div class="sports-grid">
+        <div class="sport-card">
+          <div class="sport-icon">01</div>
+          <h3>Voleybol & Basketbol</h3>
+          <p>Jamoaviy sport o‘yinlari tezkor qaror qabul qilish va do‘stlar bilan ahil ishlashga o‘rgatadi.</p>
+        </div>
+
+        <div class="sport-card">
+          <div class="sport-icon">02</div>
+          <h3>Yugurish va Atletika</h3>
+          <p>Ertalabki mashqlar va yugurish kuch, sog‘lom energiya hamda yuqori chidamlilik bag‘ishlaydi.</p>
+        </div>
+
+        <div class="sport-card">
+          <div class="sport-icon">03</div>
+          <h3>Suzish va Gimnastika</h3>
+          <p>Egri-bugri harakatlarni nazorat qilish, qomatni tik tutish va muvozanatni saqlashga yordam beradi.</p>
+        </div>
+
+        <div class="sport-card">
+          <div class="sport-icon">04</div>
+          <h3>Yangi sport turlari</h3>
+          <p>Doimiy ravishda har xil sport mashg‘ulotlarini sinab ko‘rish va faol bo‘lishni yaxshi ko‘raman.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. MENING QOBILYATLARIM ================= -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">04 • Ko‘nikmalar</span>
+        <h2 class="section-title">Mening qobilyatlarim</h2>
+        <p class="section-subtitle">
+          Har kuni rivojlantirib borayotgan asosiy bilim va shaxsiy fazilatlarim.
+        </p>
+      </div>
+
+      <div class="skills-wrapper">
+        <div class="skill-box" data-progress="88">
+          <div class="skill-top">
+            <span class="skill-name">English (Ingliz tili)</span>
+            <span class="skill-percent">88%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+          <p class="skill-note">Sevimli fanim: so‘z boyligini oshirish, o‘qish va muloqot qilish.</p>
+        </div>
+
+        <div class="skill-box" data-progress="90">
+          <div class="skill-top">
+            <span class="skill-name">Sport va Jismoniy faollik</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+          <p class="skill-note">Har xil sport turlariga qiziqish, chaqqonlik va intizom.</p>
+        </div>
+
+        <div class="skill-box" data-progress="85">
+          <div class="skill-top">
+            <span class="skill-name">Muloqot va Xushmuomalalik</span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+          <p class="skill-note">Odamlar bilan samimiy til topishish va yordam berishga tayyorlik.</p>
+        </div>
+
+        <div class="skill-box" data-progress="86">
+          <div class="skill-top">
+            <span class="skill-name">Tartib va Maqsadga intilish</span>
+            <span class="skill-percent">86%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+          <p class="skill-note">Reja tuzish, vaqtni to‘g‘ri taqsimlash va o‘z ustida ishlash.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 5. KELAJAKDA ORZULARIM ================= -->
+  <section id="dreams">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">05 • Maqsadlar</span>
+        <h2 class="section-title">Kelajakda orzularim</h2>
+        <p class="section-subtitle">
+          Bulutlar uzra parvoz qilish, yangi davlatlarni ko‘rish va o‘z salohiyatimni to‘liq namoyon etish.
+        </p>
+      </div>
+
+      <div class="dreams-grid">
+        <div class="dream-card featured">
+          <div>
+            <div class="dream-num">01</div>
+            <h3>Stuardessa bo‘lish</h3>
+            <p>
+              Xalqaro aviakompaniyada stuardessa bo‘lib ishlash, yo‘lovchilarga yuqori darajada e’tibor va
+              xavfsizlik muhitini yaratish mening bosh orzuim.
+            </p>
+          </div>
+        </div>
+
+        <div class="dream-card">
+          <div>
+            <div class="dream-num">02</div>
+            <h3>Ingliz tilini mukammal bilish</h3>
+            <p>
+              Sevimli fanim bo‘lgan English tilini erkin va ravon o‘zlashtirib, dunyoning istalgan nuqtasida
+              bemalol muloqot qilish.
+            </p>
+          </div>
+        </div>
+
+        <div class="dream-card">
+          <div>
+            <div class="dream-num">03</div>
+            <h3>Sog‘lom va ilhomlantiruvchi hayot</h3>
+            <p>
+              Sport bilan doimo do‘st bo‘lib, yangi shaharlar va madaniyatlarni kashf etish hamda atrofimdagilarga
+              yaxshi namuna bo‘lish.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-brand">Oy<span>hon</span> • Shaxsiy Veb-Sayt</div>
+      <p class="footer-copy">Qora • Oq • Qizil | Barcha huquqlar himoyalangan © <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Joriy yilni avtomatik qo'yish
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobil menyuni ochish va yopish
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.getElementById("navbar");
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    menuToggle.addEventListener("click", () => {
+      navbar.classList.toggle("open");
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navbar.classList.remove("open");
+      });
+    });
+
+    // Sahifa aylantirilganda faol menyu bandini belgilash
+    const sections = document.querySelectorAll("section");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 120;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("active");
+        }
+      });
+    });
+
+    // Qobilyatlar progress chiziqlarini silliq to'ldirish
+    const skillBoxes = document.querySelectorAll(".skill-box");
+
+    const animateSkills = () => {
+      skillBoxes.forEach((box) => {
+        const rect = box.getBoundingClientRect();
+        const progress = box.getAttribute("data-progress");
+        const fill = box.querySelector(".progress-fill");
+        if (rect.top < window.innerHeight - 60) {
+          fill.style.width = `${progress}%`;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", animateSkills);
+    window.addEventListener("load", animateSkills);
+  </script>
+</body>
+</html>
